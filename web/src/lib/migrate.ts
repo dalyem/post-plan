@@ -38,23 +38,29 @@ const MIGRATIONS: Migration[] = [
 ];
 
 export function runMigrations(db: Database.Database): void {
-  db.exec(
-    `CREATE TABLE IF NOT EXISTS _migrations (
-       name       TEXT PRIMARY KEY,
-       applied_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
-     );`,
-  );
+  // Run inside one BEGIN IMMEDIATE transaction so concurrent processes — Next's
+  // parallel build workers, or multiple app instances — serialize on the write
+  // lock and re-check `_migrations` *inside* the lock, instead of racing to insert
+  // the same row (which throws UNIQUE constraint failed). INSERT OR IGNORE is a
+  // backstop; all migration DDL is idempotent (CREATE ... IF NOT EXISTS).
+  const migrate = db.transaction(() => {
+    db.exec(
+      `CREATE TABLE IF NOT EXISTS _migrations (
+         name       TEXT PRIMARY KEY,
+         applied_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+       );`,
+    );
 
-  const applied = new Set(
-    (db.prepare('SELECT name FROM _migrations').all() as { name: string }[]).map((r) => r.name),
-  );
-  const record = db.prepare('INSERT INTO _migrations (name) VALUES (?)');
+    const applied = new Set(
+      (db.prepare('SELECT name FROM _migrations').all() as { name: string }[]).map((r) => r.name),
+    );
+    const record = db.prepare('INSERT OR IGNORE INTO _migrations (name) VALUES (?)');
 
-  for (const migration of MIGRATIONS) {
-    if (applied.has(migration.name)) continue;
-    db.transaction(() => {
+    for (const migration of MIGRATIONS) {
+      if (applied.has(migration.name)) continue;
       db.exec(migration.sql);
       record.run(migration.name);
-    })();
-  }
+    }
+  });
+  migrate.immediate();
 }
