@@ -1,0 +1,12 @@
+packages:
+  - web
+  - mcp
+
+# Allow better-sqlite3 to run its install script (fetches the native binary).
+# Standard pnpm setting — works with a stock `pnpm install`.
+onlyBuiltDependencies:
+  - better-sqlite3
+
+allowBuilds:
+  better-sqlite3: true
+  sharp: false
