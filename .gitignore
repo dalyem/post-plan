@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# mcp build output
+dist/
+
+# data + secrets
+data/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+*.log

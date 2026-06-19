@@ -1,0 +1,16 @@
+{
+  "name": "post-plan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-hosted plan-publishing app for AI agents — publish HTML plans, get shareable URLs, version and refine them.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm --filter ./web dev",
+    "build": "pnpm -r build",
+    "start": "pnpm --filter ./web start",
+    "mcp": "pnpm --filter ./mcp start"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
