@@ -51,16 +51,16 @@ Requires **Node ≥ 20** and **pnpm**.
 
 ```bash
 pnpm install
-pnpm dev          # web app on http://localhost:3000
+pnpm dev          # web app on http://localhost:8730
 ```
 
-Open http://localhost:3000 — you'll see an empty dashboard. Publish a test plan:
+Open http://localhost:8730 — you'll see an empty dashboard. Publish a test plan:
 
 ```bash
-curl -X POST http://localhost:3000/api/plans \
+curl -X POST http://localhost:8730/api/plans \
   -H 'content-type: application/json' \
   -d '{"title":"Hello","project":"demo","html":"<h1>Hello</h1><p>my first plan</p>"}'
-# → {"id":"...","url":"http://localhost:3000/p/...","version":1, ...}
+# → {"id":"...","url":"http://localhost:8730/p/...","version":1, ...}
 ```
 
 Visit the returned URL to see it rendered.
@@ -74,13 +74,13 @@ The app is a long-running Node server (not serverless).
 ```bash
 docker build -t post-plan .
 docker run -d --name post-plan \
-  -p 127.0.0.1:3000:3000 \
+  -p 127.0.0.1:8730:8730 \
   -v post-plan-data:/data \
   -e PUBLIC_BASE_URL=https://planned.example.dev \
   post-plan
 ```
 
-Publishing to `127.0.0.1:3000` keeps it off public interfaces — only your reverse
+Publishing to `127.0.0.1:8730` keeps it off public interfaces — only your reverse
 proxy reaches it.
 
 **Without Docker:**
@@ -91,7 +91,7 @@ pnpm --filter ./web build
 cp -r web/.next/static web/.next/standalone/web/.next/static
 PUBLIC_BASE_URL=https://planned.example.dev \
 DATABASE_PATH=/srv/post-plan/data.db \
-HOSTNAME=127.0.0.1 PORT=3000 \
+HOSTNAME=127.0.0.1 PORT=8730 \
 node web/.next/standalone/web/server.js
 ```
 
@@ -108,10 +108,10 @@ runs the app bound to `127.0.0.1` (front it with nginx — see below). It defaul
 ./scripts/install-service.sh --system   # system service (sudo), runs as you, boot start
 ```
 
-Configure with env vars, e.g. a different port and your public URL:
+Configure with env vars, e.g. your public URL (and a custom port if 8730 is taken):
 
 ```bash
-PORT=3000 PUBLIC_BASE_URL=https://planned.example.dev ./scripts/install-service.sh
+PUBLIC_BASE_URL=https://planned.example.dev ./scripts/install-service.sh
 ```
 
 Manage it: `systemctl --user status post-plan`, `journalctl --user -u post-plan -f`.
@@ -125,7 +125,7 @@ node path, so the unit keeps working across reboots.)
 |---|---|---|
 | `PUBLIC_BASE_URL` | (request host) | Public URL used to build the links the app returns. **Set this** behind a proxy, or links come out as `localhost`. |
 | `DATABASE_PATH` | `./data/post-plan.db` | SQLite file location (created on boot). |
-| `PORT` | `3000` | Port to bind. |
+| `PORT` | `8730` | Port to bind. |
 | `HOSTNAME` | `0.0.0.0` (Docker) | Interface to bind. Use `127.0.0.1` for bare-metal so only the proxy reaches it. |
 
 ---
@@ -147,7 +147,7 @@ user scope):
     "post-plan": {
       "command": "node",
       "args": ["/absolute/path/to/post-plan/mcp/dist/index.js"],
-      "env": { "POST_PLAN_API_BASE_URL": "http://localhost:3000" }
+      "env": { "POST_PLAN_API_BASE_URL": "http://localhost:8730" }
     }
   }
 }
@@ -220,7 +220,7 @@ set `PUBLIC_BASE_URL=https://<name>`).
 `*.ts.net` name:
 
 ```bash
-tailscale serve 3000   # → https://<machine>.<tailnet>.ts.net
+tailscale serve 8730   # → https://<machine>.<tailnet>.ts.net
 ```
 
 For a custom domain like `planned.dalem.dev`, point its DNS at the node's tailnet IP
