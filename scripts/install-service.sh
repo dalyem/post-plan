@@ -133,9 +133,11 @@ ${SUDO[@]+"${SUDO[@]}"} mkdir -p "$UNIT_DIR"
 printf '%s' "$UNIT" | ${SUDO[@]+"${SUDO[@]}"} tee "$UNIT_PATH" >/dev/null
 
 # ── enable + start ──
-echo "==> Enabling + starting $SERVICE_NAME"
+echo "==> Enabling + (re)starting $SERVICE_NAME"
 "${SYSTEMCTL[@]}" daemon-reload
-"${SYSTEMCTL[@]}" enable --now "$SERVICE_NAME"
+"${SYSTEMCTL[@]}" enable "$SERVICE_NAME" >/dev/null 2>&1 || true
+# restart (not `enable --now`) so a re-run after `git pull` actually loads the new build
+"${SYSTEMCTL[@]}" restart "$SERVICE_NAME"
 
 if [ "$MODE" = "user" ]; then
   # Keep it running after logout / across reboots without a login session.
