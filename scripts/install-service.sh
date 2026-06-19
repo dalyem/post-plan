@@ -10,7 +10,7 @@
 #   ./scripts/install-service.sh --uninstall  # stop + remove the service
 #
 # Config via environment variables (defaults shown):
-#   PORT=3000                                  # port the app binds on 127.0.0.1
+#   PORT=8730                                  # port the app binds on 127.0.0.1
 #   PUBLIC_BASE_URL=http://localhost:$PORT     # public URL used to build the links the app returns
 #   DATABASE_PATH=<repo>/data/post-plan.db     # SQLite file location
 #   SERVICE_NAME=post-plan
@@ -81,7 +81,7 @@ if [ "$("$NODE_EXE" -p 'process.versions.node.split(".")[0]')" -lt 20 ]; then
 fi
 
 # ── config ──
-PORT="${PORT:-3000}"
+PORT="${PORT:-8730}"
 DATABASE_PATH="${DATABASE_PATH:-$ROOT/data/post-plan.db}"
 PUBLIC_BASE_URL="${PUBLIC_BASE_URL:-http://localhost:$PORT}"
 NEXT_BIN="$ROOT/web/node_modules/next/dist/bin/next"

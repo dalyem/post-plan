@@ -1,7 +1,7 @@
 // Thin HTTP client over the post-plan web API. No DB access, no auth (the
 // security boundary is the Tailscale network). Uses Node's global fetch.
 
-const BASE = (process.env.POST_PLAN_API_BASE_URL ?? 'http://localhost:3000').replace(/\/+$/, '');
+const BASE = (process.env.POST_PLAN_API_BASE_URL ?? 'http://localhost:8730').replace(/\/+$/, '');
 
 export interface PlanMetaDTO {
   id: string;

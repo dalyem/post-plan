@@ -21,7 +21,7 @@ RUN pnpm --filter ./web build
 FROM node:24-slim AS runtime
 WORKDIR /app
 ENV NODE_ENV=production \
-    PORT=3000 \
+    PORT=8730 \
     HOSTNAME=0.0.0.0 \
     DATABASE_PATH=/data/post-plan.db
 # Set PUBLIC_BASE_URL at run time to your public URL, e.g. https://planned.example.dev
@@ -32,6 +32,6 @@ COPY --from=build /app/web/.next/standalone ./
 COPY --from=build /app/web/.next/static ./web/.next/static
 
 VOLUME ["/data"]
-EXPOSE 3000
+EXPOSE 8730
 # server.js lands at /app/web/server.js after copying the standalone contents.
 CMD ["node", "web/server.js"]
