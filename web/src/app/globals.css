@@ -53,14 +53,5 @@ a:hover { text-decoration: underline; }
 .empty { border: 1px dashed var(--border); border-radius: 10px; padding: 2.5rem 2rem; text-align: center; color: var(--muted); line-height: 1.7; }
 code.inline { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--panel); padding: 0.1em 0.35em; border-radius: 5px; font-size: 0.9em; }
 
-/* ── Viewer ──────────────────────────────────────────────── */
-.viewer { display: flex; flex-direction: column; height: 100vh; }
-.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.85rem; border-bottom: 1px solid var(--border); background: var(--panel); flex: 0 0 auto; }
-.bar-left, .bar-right { display: flex; align-items: center; gap: 0.6rem; min-width: 0; }
-.bar .title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 38vw; }
-.back { color: var(--muted); white-space: nowrap; }
-.vsel { display: flex; align-items: center; gap: 0.3rem; color: var(--muted); font-size: 0.85rem; }
-.vsel select { padding: 0.2rem 0.4rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); }
-.btn { padding: 0.3rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
-.btn:hover { border-color: var(--accent); text-decoration: none; }
-.frame { flex: 1 1 auto; width: 100%; border: none; background: var(--bg); }
+/* The plan viewer (/p/[id]) is now a full-bleed sandboxed iframe with no chrome,
+   so it needs no styles here. Browse/manage UI lives on the dashboard above. */
