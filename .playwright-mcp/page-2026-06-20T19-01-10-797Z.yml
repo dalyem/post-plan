@@ -1,0 +1,275 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "PreviewShip PreviewShip" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "PreviewShip" [ref=e7]
+          - generic [ref=e8]: PreviewShip
+        - navigation [ref=e9]:
+          - link "Showcase" [ref=e10] [cursor=pointer]:
+            - /url: /showcase
+          - link "Docs" [ref=e11] [cursor=pointer]:
+            - /url: /docs
+          - link "Guides" [ref=e12] [cursor=pointer]:
+            - /url: /guides
+          - link "Security" [ref=e13] [cursor=pointer]:
+            - /url: /security
+          - link "Support" [ref=e14] [cursor=pointer]:
+            - /url: /support
+          - link "Changelog" [ref=e15] [cursor=pointer]:
+            - /url: /changelog
+        - generic [ref=e16]:
+          - button "Language" [ref=e18]:
+            - img [ref=e19]
+            - generic [ref=e22]: EN
+            - img [ref=e23]
+          - link "Log in" [ref=e25] [cursor=pointer]:
+            - /url: /login
+          - link "Get Started" [ref=e26] [cursor=pointer]:
+            - /url: /register
+    - main [ref=e27]:
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: Guides / HTML File Hosting
+            - generic [ref=e32]:
+              - heading "HTML file hosting for single pages and AI artifacts" [level=1] [ref=e33]
+              - paragraph [ref=e34]: Host an HTML file online with PreviewShip. Upload .html, paste HTML, or deploy page.html from CLI/MCP and get a shareable public URL.
+            - generic [ref=e35]:
+              - generic [ref=e36]:
+                - img [ref=e37]
+                - text: Updated 2026-05-29
+              - generic [ref=e40]:
+                - img [ref=e41]
+                - text: Built for SEO and GEO citation workflows
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Answer First
+            - paragraph [ref=e46]: HTML file hosting means putting a browser-ready .html file online so anyone with the link can open it. PreviewShip hosts single HTML or Markdown files by turning uploaded, pasted, or CLI-deployed content into a static preview served at a public HTTPS URL.
+            - generic [ref=e47]:
+              - link "Start Free" [ref=e48] [cursor=pointer]:
+                - /url: /register
+                - text: Start Free
+                - img
+              - link "Read full docs" [ref=e49] [cursor=pointer]:
+                - /url: /docs
+          - generic [ref=e51]:
+            - img [ref=e52]
+            - generic [ref=e54]:
+              - paragraph [ref=e55]: Deploy build artifacts, not source-code zips.
+              - paragraph [ref=e56]: If you upload a zip, build the project first and zip the static output folder such as dist, build, out, or public with index.html and assets. Do not zip raw React/Vue/Next source folders with package.json and node_modules. Single .html files are supported directly by console upload, pasted HTML, CLI, MCP, and the VS Code/Cursor extension.
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - img [ref=e59]
+              - heading "Key takeaways" [level=2] [ref=e62]
+            - generic [ref=e63]:
+              - generic [ref=e65]: Best for standalone HTML pages, reports, dashboards, prototypes, and AI-generated artifacts.
+              - generic [ref=e67]: Supports direct .html upload, pasted HTML, CLI, MCP, VS Code, and Cursor deploys.
+              - generic [ref=e69]: Avoid raw source-code zips; deploy browser-ready HTML and assets.
+              - generic [ref=e71]: Useful when you need a shareable review link rather than a full production website.
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - img [ref=e74]
+              - heading "Recommended workflow" [level=2] [ref=e77]
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]: "1"
+                - paragraph [ref=e81]: Prepare a complete .html document or a static folder that includes index.html.
+              - generic [ref=e82]:
+                - generic [ref=e83]: "2"
+                - paragraph [ref=e84]: Deploy through the PreviewShip console, CLI, MCP, or editor extension.
+              - generic [ref=e85]:
+                - generic [ref=e86]: "3"
+                - paragraph [ref=e87]: PreviewShip serves the file as a static preview with HTTPS.
+              - generic [ref=e88]:
+                - generic [ref=e89]: "4"
+                - paragraph [ref=e90]: Send the generated URL to teammates, clients, or QA reviewers.
+          - generic [ref=e91]:
+            - heading "Comparison snapshot" [level=2] [ref=e92]
+            - table [ref=e96]:
+              - rowgroup [ref=e97]:
+                - row "Hosting need PreviewShip Production host" [ref=e98]:
+                  - columnheader "Hosting need" [ref=e99]
+                  - columnheader "PreviewShip" [ref=e100]
+                  - columnheader "Production host" [ref=e101]
+              - rowgroup [ref=e102]:
+                - row "One-off HTML Optimized for quick previews Often too much setup" [ref=e103]:
+                  - cell "One-off HTML" [ref=e104]
+                  - cell "Optimized for quick previews" [ref=e105]
+                  - cell "Often too much setup" [ref=e106]
+                - row "AI artifact Paste or upload directly Usually manual packaging" [ref=e107]:
+                  - cell "AI artifact" [ref=e108]
+                  - cell "Paste or upload directly" [ref=e109]
+                  - cell "Usually manual packaging" [ref=e110]
+                - row "Team review Project history and preview links Often release-oriented" [ref=e111]:
+                  - cell "Team review" [ref=e112]
+                  - cell "Project history and preview links" [ref=e113]
+                  - cell "Often release-oriented" [ref=e114]
+                - row "Automation CLI JSON and MCP Usually API or Git setup" [ref=e115]:
+                  - cell "Automation" [ref=e116]
+                  - cell "CLI JSON and MCP" [ref=e117]
+                  - cell "Usually API or Git setup" [ref=e118]
+          - generic [ref=e119]:
+            - heading "When HTML file hosting is enough" [level=2] [ref=e120]
+            - generic [ref=e121]:
+              - paragraph [ref=e122]: If your page is already a complete HTML document, you do not need a full web application deployment pipeline. You need a public URL that opens the page in a browser.
+              - paragraph [ref=e123]: That is common for AI-generated pages, exported reports, quick landing page concepts, HTML email previews, calculators, games, and data visualizations.
+          - generic [ref=e124]:
+            - heading "How assets work" [level=2] [ref=e125]
+            - generic [ref=e126]:
+              - paragraph [ref=e127]: A single HTML/Markdown file can include inline CSS and JavaScript. If it references local files, deploy a folder or zip that includes those assets and an index.html entry point.
+              - paragraph [ref=e128]: PreviewShip does not run a build process after upload. Framework projects should be built before deployment.
+          - generic [ref=e129]:
+            - heading "FAQ" [level=2] [ref=e130]
+            - generic [ref=e131]:
+              - group [ref=e132]:
+                - generic "What is HTML file hosting?" [ref=e133] [cursor=pointer]
+              - group [ref=e134]:
+                - generic "Can PreviewShip host a single HTML/Markdown file?" [ref=e135] [cursor=pointer]
+              - group [ref=e136]:
+                - generic "Can hosted HTML include CSS and JavaScript?" [ref=e137] [cursor=pointer]
+        - complementary [ref=e138]:
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - generic [ref=e141]: Why this page exists
+              - generic [ref=e142]: This page answers a specific deploy and preview workflow question clearly for humans and AI retrieval systems.
+            - generic [ref=e143]:
+              - paragraph [ref=e144]: It uses answer-first structure, explicit steps, a comparison table, and FAQ schema to improve citation quality.
+              - link "Browse all guides" [ref=e145] [cursor=pointer]:
+                - /url: /guides
+          - generic [ref=e146]:
+            - generic [ref=e148]: Related reads
+            - generic [ref=e149]:
+              - link "Guide Host a single HTML/Markdown file as a public preview" [ref=e150] [cursor=pointer]:
+                - /url: /guides/host-single-html-file
+                - paragraph [ref=e151]: Guide
+                - paragraph [ref=e152]: Host a single HTML/Markdown file as a public preview
+              - link "Guides Upload HTML file to website" [ref=e153] [cursor=pointer]:
+                - /url: /guides/upload-html-file-to-website
+                - paragraph [ref=e154]: Guides
+                - paragraph [ref=e155]: Upload HTML file to website
+              - link "Guides Paste HTML and get a URL" [ref=e156] [cursor=pointer]:
+                - /url: /guides/paste-html-get-url
+                - paragraph [ref=e157]: Guides
+                - paragraph [ref=e158]: Paste HTML and get a URL
+    - contentinfo [ref=e159]:
+      - generic [ref=e160]:
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - img "PreviewShip" [ref=e163]
+            - generic [ref=e164]: PreviewShip
+          - paragraph [ref=e165]: Publish HTML or Markdown online from upload, paste, CLI, editor, browser, or AI agents. Share a live URL without wiring a full production host.
+          - link "previewship@metainnovation.site" [ref=e166] [cursor=pointer]:
+            - /url: mailto:previewship@metainnovation.site
+            - img [ref=e167]
+            - text: previewship@metainnovation.site
+        - generic [ref=e174]:
+          - paragraph [ref=e175]: Resources
+          - generic [ref=e176]:
+            - link "Showcase gallery" [ref=e177] [cursor=pointer]:
+              - /url: /showcase
+              - img [ref=e178]
+              - text: Showcase gallery
+            - link "Guides" [ref=e180] [cursor=pointer]:
+              - /url: /guides
+              - img [ref=e181]
+              - text: Guides
+            - link "Docs hub" [ref=e183] [cursor=pointer]:
+              - /url: /docs
+              - img [ref=e184]
+              - text: Docs hub
+            - link "Upload HTML/Markdown file" [ref=e187] [cursor=pointer]:
+              - /url: /guides/upload-html-file-to-website
+              - img [ref=e188]
+              - text: Upload HTML/Markdown file
+            - link "HTML file hosting" [ref=e190] [cursor=pointer]:
+              - /url: /guides/html-file-hosting
+              - img [ref=e191]
+              - text: HTML file hosting
+            - link "Host HTML online" [ref=e193] [cursor=pointer]:
+              - /url: /guides/host-html-file-online
+              - img [ref=e194]
+              - text: Host HTML online
+            - link "Paste HTML get URL" [ref=e196] [cursor=pointer]:
+              - /url: /guides/paste-html-get-url
+              - img [ref=e197]
+              - text: Paste HTML get URL
+            - link "Publish HTML online" [ref=e199] [cursor=pointer]:
+              - /url: /guides/publish-html-online
+              - img [ref=e200]
+              - text: Publish HTML online
+            - link "Publish AI HTML" [ref=e202] [cursor=pointer]:
+              - /url: /guides/publish-ai-generated-html
+              - img [ref=e203]
+              - text: Publish AI HTML
+            - link "Host single HTML" [ref=e205] [cursor=pointer]:
+              - /url: /guides/host-single-html-file
+              - img [ref=e206]
+              - text: Host single HTML
+            - link "Free static hosting" [ref=e208] [cursor=pointer]:
+              - /url: /guides/free-static-website-hosting
+              - img [ref=e209]
+              - text: Free static hosting
+            - link "CLI guide" [ref=e211] [cursor=pointer]:
+              - /url: /docs/cli
+              - img [ref=e212]
+              - text: CLI guide
+            - link "MCP guide" [ref=e214] [cursor=pointer]:
+              - /url: /docs/mcp
+              - img [ref=e215]
+              - text: MCP guide
+        - generic [ref=e217]:
+          - paragraph [ref=e218]: Use Cases
+          - generic [ref=e219]:
+            - link "Design review" [ref=e220] [cursor=pointer]:
+              - /url: /use-cases/design-review-preview-links
+              - img [ref=e221]
+              - text: Design review
+            - link "AI agent workflows" [ref=e223] [cursor=pointer]:
+              - /url: /use-cases/ai-agent-preview-workflows
+              - img [ref=e224]
+              - text: AI agent workflows
+            - link "AI HTML reports" [ref=e226] [cursor=pointer]:
+              - /url: /use-cases/ai-generated-html-reports
+              - img [ref=e227]
+              - text: AI HTML reports
+            - link "Compare vs Vercel" [ref=e229] [cursor=pointer]:
+              - /url: /compare/previewship-vs-vercel
+              - img [ref=e230]
+              - text: Compare vs Vercel
+            - link "Compare vs HTML Pub" [ref=e232] [cursor=pointer]:
+              - /url: /compare/previewship-vs-htmlpub
+              - img [ref=e233]
+              - text: Compare vs HTML Pub
+            - link "Tiiny Host Alternative" [ref=e235] [cursor=pointer]:
+              - /url: /compare/tiiny-host-alternative
+              - img [ref=e236]
+              - text: Tiiny Host Alternative
+            - link "Compare vs Aired" [ref=e238] [cursor=pointer]:
+              - /url: /compare/previewship-vs-aired
+              - img [ref=e239]
+              - text: Compare vs Aired
+            - link "Compare vs GitHub Pages" [ref=e241] [cursor=pointer]:
+              - /url: /compare/previewship-vs-github-pages-for-html-sharing
+              - img [ref=e242]
+              - text: Compare vs GitHub Pages
+        - generic [ref=e244]:
+          - paragraph [ref=e245]: Trust
+          - generic [ref=e246]:
+            - link "Security" [ref=e247] [cursor=pointer]:
+              - /url: /security
+              - img [ref=e248]
+              - text: Security
+            - link "Support" [ref=e251] [cursor=pointer]:
+              - /url: /support
+              - img [ref=e252]
+              - text: Support
+            - link "Changelog" [ref=e259] [cursor=pointer]:
+              - /url: /changelog
+              - img [ref=e260]
+              - text: Changelog
+            - link "Start free" [ref=e263] [cursor=pointer]:
+              - /url: /register
+              - img [ref=e264]
+              - text: Start free
+  - region "Notifications alt+T"

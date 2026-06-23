@@ -1,0 +1,280 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "PreviewShip PreviewShip" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img "PreviewShip" [ref=e7]
+          - generic [ref=e8]: PreviewShip
+        - navigation [ref=e9]:
+          - link "Showcase" [ref=e10] [cursor=pointer]:
+            - /url: /showcase
+          - link "Docs" [ref=e11] [cursor=pointer]:
+            - /url: /docs
+          - link "Guides" [ref=e12] [cursor=pointer]:
+            - /url: /guides
+          - link "Security" [ref=e13] [cursor=pointer]:
+            - /url: /security
+          - link "Support" [ref=e14] [cursor=pointer]:
+            - /url: /support
+          - link "Changelog" [ref=e15] [cursor=pointer]:
+            - /url: /changelog
+        - generic [ref=e16]:
+          - button "Language" [ref=e18]:
+            - img [ref=e19]
+            - generic [ref=e22]: EN
+            - img [ref=e23]
+          - link "Log in" [ref=e25] [cursor=pointer]:
+            - /url: /login
+          - link "Get Started" [ref=e26] [cursor=pointer]:
+            - /url: /register
+    - main [ref=e27]:
+      - generic [ref=e28]:
+        - article [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: Docs / MCP
+            - generic [ref=e32]:
+              - heading "Let AI coding agents deploy previews as a native tool" [level=1] [ref=e33]
+              - paragraph [ref=e34]: Configure PreviewShip as an MCP server so AI coding agents can deploy previews as a native tool call without copy-pasting commands.
+            - generic [ref=e35]:
+              - generic [ref=e36]:
+                - img [ref=e37]
+                - text: Updated 2026-04-17
+              - generic [ref=e40]:
+                - img [ref=e41]
+                - text: Built for SEO and GEO citation workflows
+          - generic [ref=e44]:
+            - paragraph [ref=e45]: Answer First
+            - paragraph [ref=e46]: PreviewShip MCP server is the cleanest option when you want an agent to deploy previews inside the coding conversation. Instead of asking the model to print commands for a human to run, the agent can call PreviewShip directly and return a preview URL as part of the workflow.
+            - generic [ref=e47]:
+              - link "Start Free" [ref=e48] [cursor=pointer]:
+                - /url: /register
+                - text: Start Free
+                - img
+              - link "Read full docs" [ref=e49] [cursor=pointer]:
+                - /url: /docs
+          - generic [ref=e51]:
+            - img [ref=e52]
+            - generic [ref=e54]:
+              - paragraph [ref=e55]: Deploy build artifacts, not source-code zips.
+              - paragraph [ref=e56]: If you upload a zip, build the project first and zip the static output folder such as dist, build, out, or public with index.html and assets. Do not zip raw React/Vue/Next source folders with package.json and node_modules. Single .html files are supported directly by console upload, pasted HTML, CLI, MCP, and the VS Code/Cursor extension.
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - img [ref=e59]
+              - heading "Key takeaways" [level=2] [ref=e62]
+            - generic [ref=e63]:
+              - generic [ref=e65]: Best for agent-first workflows where the model should finish the deploy step.
+              - generic [ref=e67]: Removes command copy-paste between the chat UI and terminal.
+              - generic [ref=e69]: Pairs well with Claude Code, Cursor, Windsurf, and any MCP-compatible client.
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - img [ref=e72]
+              - heading "Recommended workflow" [level=2] [ref=e75]
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - generic [ref=e78]: "1"
+                - paragraph [ref=e79]: Create an API key in PreviewShip.
+              - generic [ref=e80]:
+                - generic [ref=e81]: "2"
+                - paragraph [ref=e82]: Add the PreviewShip MCP server definition to your client configuration.
+              - generic [ref=e83]:
+                - generic [ref=e84]: "3"
+                - paragraph [ref=e85]: "Expose `PREVIEWSHIP_API_KEY` in the MCP server environment."
+              - generic [ref=e86]:
+                - generic [ref=e87]: "4"
+                - paragraph [ref=e88]: Ask your agent to build first, then deploy the static output folder or a single .html/.md/.markdown file and return the preview URL.
+          - generic [ref=e89]:
+            - heading "Comparison snapshot" [level=2] [ref=e90]
+            - table [ref=e94]:
+              - rowgroup [ref=e95]:
+                - row "Question MCP CLI" [ref=e96]:
+                  - columnheader "Question" [ref=e97]
+                  - columnheader "MCP" [ref=e98]
+                  - columnheader "CLI" [ref=e99]
+              - rowgroup [ref=e100]:
+                - row "Who triggers deploy? The agent as a tool call A human or script" [ref=e101]:
+                  - cell "Who triggers deploy?" [ref=e102]
+                  - cell "The agent as a tool call" [ref=e103]
+                  - cell "A human or script" [ref=e104]
+                - row "Best for End-to-end AI workflows Terminal and CI flows" [ref=e105]:
+                  - cell "Best for" [ref=e106]
+                  - cell "End-to-end AI workflows" [ref=e107]
+                  - cell "Terminal and CI flows" [ref=e108]
+                - row "Output handling Structured tool result Terminal output or JSON" [ref=e109]:
+                  - cell "Output handling" [ref=e110]
+                  - cell "Structured tool result" [ref=e111]
+                  - cell "Terminal output or JSON" [ref=e112]
+                - row "Interaction style Native in chat Command-driven" [ref=e113]:
+                  - cell "Interaction style" [ref=e114]
+                  - cell "Native in chat" [ref=e115]
+                  - cell "Command-driven" [ref=e116]
+          - generic [ref=e117]:
+            - heading "Why MCP is different from command suggestions" [level=2] [ref=e118]
+            - generic [ref=e119]:
+              - paragraph [ref=e120]: Many agents can suggest a deploy command, but that still leaves the human to switch context and run it. MCP changes that by turning deployment into an actual tool invocation.
+              - paragraph [ref=e121]: For teams exploring agentic development, that difference matters. It shortens the loop from “build this UI” to “share a live preview.”
+          - generic [ref=e122]:
+            - heading "Where MCP fits in a delivery workflow" [level=2] [ref=e123]
+            - generic [ref=e124]:
+              - paragraph [ref=e125]: Use MCP for the handoff between code generation and stakeholder review. After the agent writes or edits the frontend, the same conversation can produce a live URL for review.
+              - paragraph [ref=e126]: That makes PreviewShip particularly useful for design QA, prototype sharing, and rapid iteration cycles where speed is more important than full Git-based hosting automation.
+              - paragraph [ref=e127]: For framework projects, instruct the agent to run the build step and deploy the generated dist, build, out, or export folder. If the agent created one self-contained HTML artifact or Markdown document, it can deploy that .html/.md/.markdown file directly.
+          - generic [ref=e128]:
+            - heading "Operational recommendation" [level=2] [ref=e129]
+            - paragraph [ref=e131]: Keep the CLI available even if MCP is your primary workflow. CLI remains useful for CI, fallback deploys, and environments where an MCP client is not available.
+          - generic [ref=e132]:
+            - heading "FAQ" [level=2] [ref=e133]
+            - generic [ref=e134]:
+              - group [ref=e135]:
+                - generic "Do I need MCP if the CLI already exists?" [ref=e136] [cursor=pointer]
+              - group [ref=e137]:
+                - generic "Which clients can use PreviewShip MCP?" [ref=e138] [cursor=pointer]
+              - group [ref=e139]:
+                - generic "Is MCP only useful for AI demos?" [ref=e140] [cursor=pointer]
+              - group [ref=e141]:
+                - generic "Should the agent deploy source code or build output?" [ref=e142] [cursor=pointer]
+        - complementary [ref=e143]:
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - generic [ref=e146]: Why this page exists
+              - generic [ref=e147]: This page answers a specific deploy and preview workflow question clearly for humans and AI retrieval systems.
+            - generic [ref=e148]:
+              - paragraph [ref=e149]: It uses answer-first structure, explicit steps, a comparison table, and FAQ schema to improve citation quality.
+              - link "Browse all guides" [ref=e150] [cursor=pointer]:
+                - /url: /guides
+          - generic [ref=e151]:
+            - generic [ref=e153]: Related reads
+            - generic [ref=e154]:
+              - link "Docs Deploy a frontend build from the terminal in one command" [ref=e155] [cursor=pointer]:
+                - /url: /docs/cli
+                - paragraph [ref=e156]: Docs
+                - paragraph [ref=e157]: Deploy a frontend build from the terminal in one command
+              - link "Guide Turn Claude Code output into a live preview URL" [ref=e158] [cursor=pointer]:
+                - /url: /guides/deploy-from-claude-code
+                - paragraph [ref=e159]: Guide
+                - paragraph [ref=e160]: Turn Claude Code output into a live preview URL
+              - link "Use Case Agentic frontend work is only useful if sharing is fast" [ref=e161] [cursor=pointer]:
+                - /url: /use-cases/ai-agent-preview-workflows
+                - paragraph [ref=e162]: Use Case
+                - paragraph [ref=e163]: Agentic frontend work is only useful if sharing is fast
+    - contentinfo [ref=e164]:
+      - generic [ref=e165]:
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - img "PreviewShip" [ref=e168]
+            - generic [ref=e169]: PreviewShip
+          - paragraph [ref=e170]: Publish HTML or Markdown online from upload, paste, CLI, editor, browser, or AI agents. Share a live URL without wiring a full production host.
+          - link "previewship@metainnovation.site" [ref=e171] [cursor=pointer]:
+            - /url: mailto:previewship@metainnovation.site
+            - img [ref=e172]
+            - text: previewship@metainnovation.site
+        - generic [ref=e179]:
+          - paragraph [ref=e180]: Resources
+          - generic [ref=e181]:
+            - link "Showcase gallery" [ref=e182] [cursor=pointer]:
+              - /url: /showcase
+              - img [ref=e183]
+              - text: Showcase gallery
+            - link "Guides" [ref=e185] [cursor=pointer]:
+              - /url: /guides
+              - img [ref=e186]
+              - text: Guides
+            - link "Docs hub" [ref=e188] [cursor=pointer]:
+              - /url: /docs
+              - img [ref=e189]
+              - text: Docs hub
+            - link "Upload HTML/Markdown file" [ref=e192] [cursor=pointer]:
+              - /url: /guides/upload-html-file-to-website
+              - img [ref=e193]
+              - text: Upload HTML/Markdown file
+            - link "HTML file hosting" [ref=e195] [cursor=pointer]:
+              - /url: /guides/html-file-hosting
+              - img [ref=e196]
+              - text: HTML file hosting
+            - link "Host HTML online" [ref=e198] [cursor=pointer]:
+              - /url: /guides/host-html-file-online
+              - img [ref=e199]
+              - text: Host HTML online
+            - link "Paste HTML get URL" [ref=e201] [cursor=pointer]:
+              - /url: /guides/paste-html-get-url
+              - img [ref=e202]
+              - text: Paste HTML get URL
+            - link "Publish HTML online" [ref=e204] [cursor=pointer]:
+              - /url: /guides/publish-html-online
+              - img [ref=e205]
+              - text: Publish HTML online
+            - link "Publish AI HTML" [ref=e207] [cursor=pointer]:
+              - /url: /guides/publish-ai-generated-html
+              - img [ref=e208]
+              - text: Publish AI HTML
+            - link "Host single HTML" [ref=e210] [cursor=pointer]:
+              - /url: /guides/host-single-html-file
+              - img [ref=e211]
+              - text: Host single HTML
+            - link "Free static hosting" [ref=e213] [cursor=pointer]:
+              - /url: /guides/free-static-website-hosting
+              - img [ref=e214]
+              - text: Free static hosting
+            - link "CLI guide" [ref=e216] [cursor=pointer]:
+              - /url: /docs/cli
+              - img [ref=e217]
+              - text: CLI guide
+            - link "MCP guide" [ref=e219] [cursor=pointer]:
+              - /url: /docs/mcp
+              - img [ref=e220]
+              - text: MCP guide
+        - generic [ref=e222]:
+          - paragraph [ref=e223]: Use Cases
+          - generic [ref=e224]:
+            - link "Design review" [ref=e225] [cursor=pointer]:
+              - /url: /use-cases/design-review-preview-links
+              - img [ref=e226]
+              - text: Design review
+            - link "AI agent workflows" [ref=e228] [cursor=pointer]:
+              - /url: /use-cases/ai-agent-preview-workflows
+              - img [ref=e229]
+              - text: AI agent workflows
+            - link "AI HTML reports" [ref=e231] [cursor=pointer]:
+              - /url: /use-cases/ai-generated-html-reports
+              - img [ref=e232]
+              - text: AI HTML reports
+            - link "Compare vs Vercel" [ref=e234] [cursor=pointer]:
+              - /url: /compare/previewship-vs-vercel
+              - img [ref=e235]
+              - text: Compare vs Vercel
+            - link "Compare vs HTML Pub" [ref=e237] [cursor=pointer]:
+              - /url: /compare/previewship-vs-htmlpub
+              - img [ref=e238]
+              - text: Compare vs HTML Pub
+            - link "Tiiny Host Alternative" [ref=e240] [cursor=pointer]:
+              - /url: /compare/tiiny-host-alternative
+              - img [ref=e241]
+              - text: Tiiny Host Alternative
+            - link "Compare vs Aired" [ref=e243] [cursor=pointer]:
+              - /url: /compare/previewship-vs-aired
+              - img [ref=e244]
+              - text: Compare vs Aired
+            - link "Compare vs GitHub Pages" [ref=e246] [cursor=pointer]:
+              - /url: /compare/previewship-vs-github-pages-for-html-sharing
+              - img [ref=e247]
+              - text: Compare vs GitHub Pages
+        - generic [ref=e249]:
+          - paragraph [ref=e250]: Trust
+          - generic [ref=e251]:
+            - link "Security" [ref=e252] [cursor=pointer]:
+              - /url: /security
+              - img [ref=e253]
+              - text: Security
+            - link "Support" [ref=e256] [cursor=pointer]:
+              - /url: /support
+              - img [ref=e257]
+              - text: Support
+            - link "Changelog" [ref=e264] [cursor=pointer]:
+              - /url: /changelog
+              - img [ref=e265]
+              - text: Changelog
+            - link "Start free" [ref=e268] [cursor=pointer]:
+              - /url: /register
+              - img [ref=e269]
+              - text: Start free
+  - region "Notifications alt+T"

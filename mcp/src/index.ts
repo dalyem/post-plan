@@ -30,7 +30,7 @@ const server = new McpServer(
 server.registerTool(
   'publish_plan',
   {
-    title: 'Publish plan',
+    title: 'Publish plan or document',
     description: PUBLISH_DESCRIPTION,
     inputSchema: {
       title: z.string().describe('Short human title for the plan'),
@@ -57,7 +57,7 @@ server.registerTool(
   {
     title: 'Get plan',
     description:
-      "Fetch a plan's original (un-themed) source HTML so you can read, verify, or refine it. " +
+      "Fetch a plan or document's original (un-themed) source HTML so you can read, verify, or refine it. " +
       'Accepts a plan id or a full plan URL. To publish a refinement, use update_plan.',
     inputSchema: {
       plan: z.string().describe('Plan id (e.g. k3f9qm2p) or full plan URL'),
@@ -92,7 +92,7 @@ server.registerTool(
   'list_plans',
   {
     title: 'List plans',
-    description: 'List published plans (most recently updated first), optionally filtered by project.',
+    description: 'List published plans and documents (most recently updated first), optionally filtered by project.',
     inputSchema: {
       project: z.string().optional().describe('Filter by project name'),
       limit: z.number().int().positive().max(100).optional().describe('Max results (default 30)'),
@@ -118,7 +118,7 @@ server.registerTool(
   {
     title: 'Update plan (new version)',
     description:
-      'Publish a new version of an existing plan — the verify/refine path. Accepts a plan id or ' +
+      'Publish a new version of an existing plan or document — the verify/refine path. Accepts a plan id or ' +
       'full plan URL; the new HTML becomes the current version under the same URL.',
     inputSchema: {
       plan: z.string().describe('Plan id or full plan URL'),
@@ -146,7 +146,7 @@ server.registerPrompt(
   {
     title: 'Author a post-plan HTML plan',
     description:
-      'Load the full post-plan HTML authoring spec + skeleton, write the plan, then publish it with publish_plan.',
+      'Load the full post-plan HTML authoring spec + skeleton, write the plan or document, then publish it with publish_plan.',
     argsSchema: {
       task: z.string().optional().describe('What the plan is for'),
       project: z.string().optional().describe('Project name to tag the plan with'),
@@ -154,11 +154,11 @@ server.registerPrompt(
   },
   ({ task, project }) => {
     const lead = task
-      ? `Create an implementation plan for: ${task}\n\n`
-      : 'Create an implementation plan.\n\n';
+      ? `Create an implementation plan or document for: ${task}\n\n`
+      : 'Create an implementation plan or document.\n\n';
     const tail = project
-      ? `\n\nWhen the plan is ready, publish it with publish_plan (project: "${project}") and give me the returned URL.`
-      : '\n\nWhen the plan is ready, publish it with publish_plan and give me the returned URL.';
+      ? `\n\nWhen it's ready, publish it with publish_plan (project: "${project}") and give me the returned URL.`
+      : "\n\nWhen it's ready, publish it with publish_plan and give me the returned URL.";
     return {
       messages: [
         {

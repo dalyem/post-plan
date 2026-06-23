@@ -1,23 +1,27 @@
-// Single source of truth for how agents should author plans. Fed into three
-// channels: the always-on server `instructions`, the compact publish_plan
-// description, and the on-demand `plan` prompt + `post-plan-format` resource.
+// Single source of truth for how agents should author plans and documents. Fed
+// into three channels: the always-on server `instructions`, the compact
+// publish_plan description, and the on-demand `plan` prompt + `post-plan-format`
+// resource.
 
 export const FORMAT_RESOURCE_URI = 'post-plan://format';
 
 /** Tier 1 — tiny, always-on. Injected into the client at connect time. */
 export const PLAN_INSTRUCTIONS = [
-  'post-plan stores implementation plans as shareable HTML pages.',
-  'When the user asks for an implementation plan, publish it to post-plan instead of (or alongside) a markdown plan file:',
-  'write the plan as semantic HTML and call `publish_plan`, then give the user the returned URL.',
+  'post-plan turns plans, research, and design/review documents into shareable, themed HTML pages.',
+  'Whenever you produce a substantial document for the user to read or review — an implementation plan, research findings, a design doc, an audit, an investigation —',
+  'publish it to post-plan as semantic HTML with `publish_plan` and give the user the returned URL, instead of (or alongside) a local markdown file.',
+  'If you drafted it under a plan/approval flow that writes a local file (e.g. plan mode), publish it to post-plan as soon as the user approves it.',
+  'To build on existing work, find it with `list_plans` / `get_plan` and publish revisions with `update_plan` (a new version under the same URL).',
+  "After publishing or updating, record the document's title, URL, id, and version in a `postplan.md` manifest at the project root (newest first; update the entry in place on a revision),",
+  'and read `postplan.md` first when reviewing or building on prior work for this project.',
   'The app applies a consistent baseline theme, so a <style> block is optional.',
-  'To revise an existing plan, fetch it with `get_plan` and publish the revision with `update_plan` (a new version under the same URL).',
   'All tools accept a plan id or a full plan URL.',
 ].join(' ');
 
 /** Compact description shown on the publish_plan tool itself. */
 export const PUBLISH_DESCRIPTION = [
-  'Publish an implementation plan as an HTML page and get back a stable, shareable URL.',
-  'Provide the plan as semantic HTML (headings, lists, code blocks) — a full <!doctype html> document or a bare fragment.',
+  'Publish a plan, research write-up, or design/review document as an HTML page and get back a stable, shareable URL.',
+  'Provide the content as semantic HTML (headings, lists, code blocks) — a full <!doctype html> document or a bare fragment.',
   'post-plan applies a consistent baseline theme, so a <style> block is optional (add one only to customize; your styles override the theme).',
   'For the full house format and a skeleton, load the `post-plan-format` resource or the `plan` prompt.',
 ].join(' ');
@@ -59,17 +63,18 @@ export const PLAN_SKELETON = `<!doctype html>
 </html>`;
 
 /** Tier 2 — the deep authoring spec, loaded only on demand. */
-export const PLAN_SPEC = `# post-plan — HTML plan authoring format
+export const PLAN_SPEC = `# post-plan — HTML authoring format
 
-Author the plan as **semantic HTML**. post-plan renders it with a consistent
+Author the document as **semantic HTML** — whether it's an implementation plan,
+research findings, or a design/review doc. post-plan renders it with a consistent
 baseline theme (typography, colors, light/dark mode, code blocks, tables), so you
 usually do **not** need to write any CSS.
 
 ## Rules
 - Output valid HTML. A full \`<!doctype html>\` document is preferred; a bare fragment is also accepted and will be wrapped automatically.
 - Include a descriptive \`<title>\` when you send a full document.
-- Use one \`<h1>\` for the plan title, then \`<section>\`s introduced by \`<h2>\` headings.
-- Recommended sections: **Context**, **Approach**, **Steps** (an ordered list), **Verification**. Add others as the work warrants (Risks, Out of scope, Open questions).
+- Use one \`<h1>\` for the title, then \`<section>\`s introduced by \`<h2>\` headings.
+- For an implementation plan, recommended sections are **Context**, **Approach**, **Steps** (an ordered list), **Verification** — add others as the work warrants (Risks, Out of scope, Open questions). Research and design docs may use whatever sections fit (e.g. Summary, Findings, Options, Recommendation).
 - Use \`<pre><code>\` for code and commands, \`<ul>\`/\`<ol>\` for lists, \`<table>\` for comparisons.
 - Keep it **self-contained**: do not depend on external assets (scripts, styles, fonts, or images referenced by URL). Inline \`<style>\`/\`<script>\` are fine if you want custom styling or interactivity — your styles override the baseline theme.
 
@@ -78,5 +83,20 @@ usually do **not** need to write any CSS.
 ${PLAN_SKELETON}
 \`\`\`
 
-After writing the plan, publish it with the \`publish_plan\` tool and share the
-returned URL with the user.`;
+After publishing, share the returned URL with the user.
+
+## Manifest (\`postplan.md\`)
+Keep a repo-local index of what you've published so you (and other agents) can find prior work for this project later.
+
+- After a successful \`publish_plan\` or \`update_plan\`, record the entry in a \`postplan.md\` file at the project root. Create it if it doesn't exist.
+- Prepend new entries (newest first). On a revision, update the existing entry in place (bump the version and date) instead of adding a duplicate.
+- When asked to review or build on prior plans for this project, read \`postplan.md\` first, then use \`get_plan\` / \`list_plans\`.
+
+Format:
+\`\`\`markdown
+# post-plan manifest
+Project: <project name> — plans published for this repo (newest first). Maintained by agents.
+
+- **<plan title>** — <url> (\`<id>\`, v<version>, <YYYY-MM-DD>)
+\`\`\`
+The \`Project:\` header records the post-plan \`project\` name so you know what to pass to \`list_plans\`.`;
