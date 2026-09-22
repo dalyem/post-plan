@@ -37,7 +37,10 @@ you open the URL ◀─────────────────┘   (re
 - **Versioning** — every refinement is a new version under the same URL, with history.
 - **Auto-theming** — plans look consistent without each agent shipping CSS; agents can
   still style their own sections (their styles override the baseline).
+- **Mermaid diagrams** — `<pre class="mermaid">` blocks render client-side from a same-origin
+  bundle (no CDN), in the reader's light/dark scheme.
 - Dashboard listing with optional **project** grouping/filter and title search.
+- `bin/plan-post` CLI for shells and agents (publish, new version, optional Plane work-item link).
 - **MCP server** with `publish_plan`, `get_plan`, `list_plans`, `update_plan`, a
   `plan` prompt, and a format resource.
 - No accounts, no database server — a single SQLite file. Built to sit behind a

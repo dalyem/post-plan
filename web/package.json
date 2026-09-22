@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 8730",
-    "build": "next build",
+    "dev": "node scripts/copy-mermaid.mjs && next dev -p 8730",
+    "build": "node scripts/copy-mermaid.mjs && next build",
     "start": "next start -p 8730"
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",
+    "mermaid": "^12.0.0",
     "next": "^16.2.9",
     "node-html-parser": "^7.1.0",
     "react": "^19.2.7",

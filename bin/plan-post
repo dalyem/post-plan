@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# plan-post: publish an HTML plan/document to post-plan and print its URL.
+#
+#   plan-post [--title "Title"] [--project KEY-or-name] [--item KEY-N] [--note "why"] [--update <id-or-url>] <file.html | ->
+#
+#   --item KEY-N   sets --project to the Plane project key (KILN) if unset, and, when
+#                  ~/.config/agent-mcp/plane.env is readable, attaches the URL to that Plane
+#                  work item as a link (skip with --no-link). post-plan itself is Plane-agnostic.
+#   --update ID    publishes a new VERSION under the same URL (ID may be the full plan URL).
+set -euo pipefail
+BASE="${POST_PLAN_URL:-${POST_PLAN_API_BASE_URL:-http://127.0.0.1:8730}}"
+TITLE=""; PROJECT=""; ITEM=""; NOTE=""; UPDATE=""; FILE=""; NOLINK=0
+while [ $# -gt 0 ]; do case "$1" in
+  --title) TITLE="$2"; shift 2;; --project) PROJECT="$2"; shift 2;; --item) ITEM="$2"; shift 2;; --note) NOTE="$2"; shift 2;;
+  --update) UPDATE="$2"; shift 2;; --no-link) NOLINK=1; shift;; --kind) shift 2;;  # --kind accepted for compatibility, ignored
+  -h|--help) sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'; exit 0;; -*) echo "unknown flag $1" >&2; exit 2;; *) FILE="$1"; shift;; esac; done
+[ -n "$FILE" ] || { echo "usage: plan-post [--title T] [--item KEY-N] [--project P] [--update ID] <file.html|->" >&2; exit 2; }
+if [ "$FILE" = "-" ]; then BODY=$(cat); else BODY=$(cat "$FILE"); fi
+[ -n "$TITLE" ] || TITLE=$(printf '%s' "$BODY" | grep -oiE '<title>[^<]*' | head -1 | sed -E 's/<title>//I' || true)
+[ -n "$TITLE" ] || TITLE=$(printf '%s' "$BODY" | grep -oiE '<h1[^>]*>[^<]*' | head -1 | sed -E 's/<h1[^>]*>//I' || true)
+[ -n "$TITLE" ] || TITLE="${ITEM:-Untitled}"
+if [ -z "$PROJECT" ] && [ -n "$ITEM" ]; then PROJECT=$(printf '%s' "$ITEM" | sed -E 's/-[0-9]+$//' | tr '[:lower:]' '[:upper:]'); fi
+UPDATE=${UPDATE##*/p/}; UPDATE=${UPDATE%%\?*}
+if [ -n "$UPDATE" ]; then
+  JSON=$(node -e 'const [t,n,b]=process.argv.slice(1);process.stdout.write(JSON.stringify({title:t||undefined,note:n||undefined,html:b}))' "$TITLE" "$NOTE" "$BODY")
+  RESP=$(printf '%s' "$JSON" | curl -sS -X POST -H 'Content-Type: application/json' --data-binary @- "$BASE/api/plans/$UPDATE/versions")
+else
+  JSON=$(node -e 'const [t,p,n,b]=process.argv.slice(1);process.stdout.write(JSON.stringify({title:t,project:p||undefined,note:n||undefined,html:b}))' "$TITLE" "$PROJECT" "$NOTE" "$BODY")
+  RESP=$(printf '%s' "$JSON" | curl -sS -X POST -H 'Content-Type: application/json' --data-binary @- "$BASE/api/plans")
+fi
+URL=$(node -e 'let r;try{r=JSON.parse(process.argv[1])}catch{console.error("plan-post: bad response:",process.argv[1].slice(0,200));process.exit(1)}if(r.error){console.error("plan-post:",r.error);process.exit(1)}console.log(r.url)' "$RESP")
+echo "$URL"
+[ -n "$UPDATE" ] && echo "plan-post: new version $(node -e 'console.log(JSON.parse(process.argv[1]).version)' "$RESP") of $UPDATE" >&2
+# optional: attach as a Plane work item link (create only)
+if [ -z "$UPDATE" ] && [ "$NOLINK" = 0 ] && [ -n "$ITEM" ] && [ -r "$HOME/.config/agent-mcp/plane.env" ]; then
+  set -a; . "$HOME/.config/agent-mcp/plane.env"; set +a
+  node - "$ITEM" "$URL" "$TITLE" <<'JS' || echo "plan-post: could not attach link to $ITEM (publish succeeded)" >&2
+const [key,url,title]=process.argv.slice(2);const B=process.env.PLANE_BASE_URL,S=process.env.PLANE_WORKSPACE_SLUG,H={"X-API-Key":process.env.PLANE_API_KEY,"Content-Type":"application/json"};
+const fs=require("fs");const m=/^([A-Z0-9]+)-(\d+)$/i.exec(key);if(!m){console.error("plan-post: bad item key");process.exit(1)}
+const y=fs.readFileSync(process.env.HOME+"/.config/agent-mcp/projects.yaml","utf8");let pid=null,cur=null;
+for(const l of y.split("\n")){let a=/^  ([\w.-]+):\s*$/.exec(l);if(a){cur={};continue}a=/^    (\w+):\s*(.*)$/.exec(l);if(a&&cur){cur[a[1]]=a[2].trim();if(cur.plane_project&&cur.plane_project_id&&cur.plane_project.toUpperCase()===m[1].toUpperCase())pid=cur.plane_project_id}}
+if(!pid){console.error("plan-post: project "+m[1]+" not in projects.yaml");process.exit(1)}
+(async()=>{const api=async(meth,p,b)=>{const r=await fetch(`${B}/api/v1/workspaces/${S}${p}`,{method:meth,headers:H,body:b?JSON.stringify(b):undefined});if(!r.ok)throw new Error(meth+" "+p+" "+r.status);return r.json()};
+ let items=[],cursor="";for(;;){const j=await api("GET",`/projects/${pid}/issues/?fields=id,sequence_id&per_page=100${cursor?"&cursor="+cursor:""}`);items=items.concat(j.results);if(!j.next_page_results)break;cursor=j.next_cursor}
+ const it=items.find(i=>String(i.sequence_id)===m[2]);if(!it)throw new Error(key+" not found");
+ await api("POST",`/projects/${pid}/issues/${it.id}/links/`,{url,title:`Plan: ${title}`});console.error(`plan-post: linked to ${key}`)})().catch(e=>{console.error("plan-post:",e.message);process.exit(1)});
+JS
+fi

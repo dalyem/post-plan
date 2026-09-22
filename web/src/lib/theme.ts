@@ -61,4 +61,6 @@ img { max-width: 100%; height: auto; }
 ul, ol { padding-left: 1.5rem; }
 li { margin: 0.25rem 0; }
 li > ul, li > ol { margin-bottom: 0; }
+pre.mermaid { background: transparent; border: none; text-align: center; overflow: visible; }
+pre.mermaid svg { max-width: 100%; height: auto; }
 `.trim();

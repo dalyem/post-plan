@@ -23,6 +23,7 @@ export const PUBLISH_DESCRIPTION = [
   'Publish a plan, research write-up, or design/review document as an HTML page and get back a stable, shareable URL.',
   'Provide the content as semantic HTML (headings, lists, code blocks) — a full <!doctype html> document or a bare fragment.',
   'post-plan applies a consistent baseline theme, so a <style> block is optional (add one only to customize; your styles override the theme).',
+  'Diagrams: put Mermaid source in <pre class="mermaid"> and it is rendered for the reader.',
   'For the full house format and a skeleton, load the `post-plan-format` resource or the `plan` prompt.',
 ].join(' ');
 
@@ -76,6 +77,7 @@ usually do **not** need to write any CSS.
 - Use one \`<h1>\` for the title, then \`<section>\`s introduced by \`<h2>\` headings.
 - For an implementation plan, recommended sections are **Context**, **Approach**, **Steps** (an ordered list), **Verification** — add others as the work warrants (Risks, Out of scope, Open questions). Research and design docs may use whatever sections fit (e.g. Summary, Findings, Options, Recommendation).
 - Use \`<pre><code>\` for code and commands, \`<ul>\`/\`<ol>\` for lists, \`<table>\` for comparisons.
+- Diagrams: write Mermaid inside \`<pre class="mermaid">…</pre>\` (flowchart, sequence, state, ER, gantt). post-plan renders it client-side in the reader's light/dark scheme; inline \`<svg>\` also works.
 - Keep it **self-contained**: do not depend on external assets (scripts, styles, fonts, or images referenced by URL). Inline \`<style>\`/\`<script>\` are fine if you want custom styling or interactivity — your styles override the baseline theme.
 
 ## Skeleton

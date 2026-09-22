@@ -22,3 +22,6 @@ data/
 *.tsbuildinfo
 next-env.d.ts
 *.log
+
+# vendored browser bundles are copied at build time
+web/public/vendor/
